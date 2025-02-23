@@ -1,6 +1,14 @@
 version: '3.8'
 
 services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - sintad-blog-network
+
   backend:
     build:
       context: ./sintad-blog-backend
@@ -8,9 +16,13 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - app-network
+      - sintad-blog-network
     depends_on:
       - postgres
+      - redis
+    environment:
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
 
   frontend:
     build:
@@ -19,7 +31,7 @@ services:
     ports:
       - "4300:80"
     networks:
-      - app-network
+      - sintad-blog-network
     depends_on:
       - backend
 
@@ -33,8 +45,9 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - app-network
+      - sintad-blog-network
 
 networks:
-  app-network:
+  sintad-blog-network:
+    name: sintad-blog-network
     driver: bridge
