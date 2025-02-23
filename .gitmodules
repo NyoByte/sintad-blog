@@ -1,0 +1,6 @@
+[submodule "sintad-blog-backend"]
+	path = sintad-blog-backend
+	url = https://github.com/NyoByte/sintad-blog-backend.git
+[submodule "sintad-blog-frontend"]
+	path = sintad-blog-frontend
+	url = https://github.com/NyoByte/sintad-blog-frontend.git
