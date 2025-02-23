@@ -1,2 +1,1 @@
 # sintad-blog
-# sintad-blog
